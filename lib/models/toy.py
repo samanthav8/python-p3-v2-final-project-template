@@ -3,7 +3,7 @@ from models.__init__ import CURSOR, CONN
 from models.kid import Kid
 
 class Toy:
-    def __init__(self, id, name, type, condition, kid_id):
+    def __init__(self, name, type, condition, kid_id, id=None):
         self.id = id
         self.name = name
         self.type = type
@@ -32,4 +32,25 @@ class Toy:
         """
         CURSOR.execute(sql)
         CONN.commit()
+
+    def save(self):
+        """ Insert a new row with the name and age values of the current Toy instance.
+        Update object id attribute using the primary key value of new row.
+        """
+        sql = """
+            INSERT INTO toys (name, type, condition, kid_id)
+            VALUES (?, ?, ?, ?)
+        """
+
+        CURSOR.execute(sql, (self.name, self.type, self.condition, self.kid_id))
+        CONN.commit()
+
+        self.id = CURSOR.lastrowid
+
+    @classmethod
+    def create(cls, name, type, condition, kid_id):
+        """ Initialize a new Kid instance and save the object to the database """
+        kid = cls(name, type, condition, kid_id)
+        kid.save()
+        return kid
 
