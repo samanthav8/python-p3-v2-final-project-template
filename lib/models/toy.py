@@ -49,8 +49,19 @@ class Toy:
 
     @classmethod
     def create(cls, name, type, condition, kid_id):
-        """ Initialize a new Kid instance and save the object to the database """
+        """ Initialize a new Toy instance and save the object to the database """
         kid = cls(name, type, condition, kid_id)
         kid.save()
         return kid
+    
+    def update(self):
+        """Update the table row corresponding to the current Toy instance."""
+        sql = """
+            UPDATE toys
+            SET name = ?, type = ?, condition = ?, kid_id = ?
+            WHERE id = ?
+        """
+        CURSOR.execute(sql, (self.name, self.type, self.condition, self.kid_id, self.id))
+        CONN.commit()
+
 

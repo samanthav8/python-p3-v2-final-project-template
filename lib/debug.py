@@ -13,6 +13,11 @@ Toy.create_table()
 
 Kid.create("Sam", "3")
 Kid.create("Ceci", "4")
-Toy.create("Buzz", "Action figure", "New", "2")
+buzz = Toy.create("Buzz", "Action figure", "New", "2")
+buzz.name = "Buzz Lightyear"
+buzz.type = "Action-figure"
+buzz.condition = "Used"
+buzz.kid_id = "1"
+buzz.update()
 
 ipdb.set_trace()
