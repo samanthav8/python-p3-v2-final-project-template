@@ -64,4 +64,13 @@ class Toy:
         CURSOR.execute(sql, (self.name, self.type, self.condition, self.kid_id, self.id))
         CONN.commit()
 
+    def delete(self):
+        """Delete the table row corresponding to the current Toy instance"""
+        sql = """
+            DELETE FROM toys
+            WHERE id = ?
+        """
+
+        CURSOR.execute(sql, (self.id,))
+        CONN.commit()
 
