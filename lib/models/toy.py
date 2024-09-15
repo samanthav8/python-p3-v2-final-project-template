@@ -3,6 +3,9 @@ from models.__init__ import CURSOR, CONN
 from models.kid import Kid
 
 class Toy:
+
+    all = {}
+
     def __init__(self, name, type, condition, kid_id, id=None):
         self.id = id
         self.name = name
@@ -46,6 +49,7 @@ class Toy:
         CONN.commit()
 
         self.id = CURSOR.lastrowid
+        type(self).all[self.id] = self
 
     @classmethod
     def create(cls, name, type, condition, kid_id):
