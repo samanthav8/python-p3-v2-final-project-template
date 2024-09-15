@@ -6,14 +6,16 @@ from models.kid import Kid
 from models.toy import Toy
 import ipdb
 
-Kid.drop_table()
-Kid.create_table()
-Toy.drop_table()
-Toy.create_table()
+def reset_database():
+    Kid.drop_table()
+    Kid.create_table()
+    Toy.drop_table()
+    Toy.create_table()
 
-Kid.create("Sam", "3")
-Kid.create("Ceci", "4")
-buzz = Toy.create("Buzz", "Action figure", "New", "2")
-buzz.delete()
+    Kid.create("Sam", "3")
+    Kid.create("Ceci", "4")
+    Toy.create("Buzz", "Action figure", "New", "2")
 
+
+reset_database()
 ipdb.set_trace()
