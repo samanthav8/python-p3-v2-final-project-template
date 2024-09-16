@@ -13,6 +13,9 @@ class Toy:
         self.condition = condition
         self.kid_id = kid_id
 
+    def __repr__(self):
+        return f"<Toy {self.id}: {self.name}, {self.type}, {self.condition}, {self.kid_id}>"
+
     @classmethod
     def create_table(cls):
         """ Create the toy table to store the attributes of the Toy instances"""
@@ -78,3 +81,21 @@ class Toy:
         CURSOR.execute(sql, (self.id,))
         CONN.commit()
 
+    @classmethod
+    def instance_from_db(cls, row):
+        """Return a Toy object having the attribute values from the table row."""
+
+        # Check the dictionary for an existing instance using the row's primary key
+        toy = cls.all.get(row[0])
+        if toy:
+            # ensure attributes match row values in case local object was modified
+            toy.name = row[1]
+            toy.type = row[2]
+            toy.condition = row[3]
+            toy.kid_id = row[4]
+        else:
+            # not in dictionary, create new instance and add to dictionary
+            toy = cls(row[1], row[2])
+            toy.id = row[0]
+            cls.all[toy.id] = toy
+        return toy

@@ -14,7 +14,9 @@ def reset_database():
 
     Kid.create("Sam", "3")
     Kid.create("Ceci", "4")
+
     Toy.create("Buzz", "Action figure", "New", "2")
+    Toy.create("Bear", "Stuffed Animal", "New", "1")
 
 
 reset_database()
