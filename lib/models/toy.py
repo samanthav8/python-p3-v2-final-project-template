@@ -81,6 +81,12 @@ class Toy:
         CURSOR.execute(sql, (self.id,))
         CONN.commit()
 
+        # Delete the dictionary entry using id as the key
+        del type(self).all[self.id]
+
+        # Set the id to None
+        self.id = None
+
     @classmethod
     def instance_from_db(cls, row):
         """Return a Toy object having the attribute values from the table row."""
@@ -121,4 +127,17 @@ class Toy:
         """
 
         row = CURSOR.execute(sql, (id,)).fetchone()
+        return cls.instance_from_db(row) if row else None
+
+
+    @classmethod
+    def find_by_name(cls, name):
+        """Return a Toy object corresponding to first table row matching specified name"""
+        sql = """
+            SELECT *
+            FROM toys
+            WHERE name is ?
+        """
+
+        row = CURSOR.execute(sql, (name,)).fetchone()
         return cls.instance_from_db(row) if row else None
