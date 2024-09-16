@@ -99,3 +99,14 @@ class Toy:
             toy.id = row[0]
             cls.all[toy.id] = toy
         return toy
+    @classmethod
+    def get_all(cls):
+        """Return a list containing a Toy object per row in the table"""
+        sql = """
+            SELECT *
+            FROM toys
+        """
+
+        rows = CURSOR.execute(sql).fetchall()
+
+        return [cls.instance_from_db(row) for row in rows]
