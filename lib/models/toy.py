@@ -14,12 +14,11 @@ class Toy:
         self.kid_id = kid_id
 
     def __repr__(self):
-        return f"<Toy {self.id}: {self.name}, {self.type}, {self.condition}, {self.kid_id}>"
-    def __repr__(self):
         return (
             f"<Toy {self.id}: {self.name}, {self.type}, {self.condition}, " +
             f"Kid ID: , {self.kid_id}>"
         )
+    
 
     @classmethod
     def create_table(cls):
@@ -65,9 +64,9 @@ class Toy:
     @classmethod
     def create(cls, name, type, condition, kid_id):
         """ Initialize a new Toy instance and save the object to the database """
-        kid = cls(name, type, condition, kid_id)
-        kid.save()
-        return kid
+        toy = cls(name, type, condition, kid_id)
+        toy.save()
+        return toy
     
     def update(self):
         """Update the table row corresponding to the current Toy instance."""

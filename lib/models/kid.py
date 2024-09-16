@@ -26,7 +26,6 @@ class Kid:
             raise ValueError(
                 "Name must be a non-empty string"
             )
-        
     @property
     def age(self):
         return self._age
@@ -37,7 +36,6 @@ class Kid:
             self._age = age
         else:
             raise ValueError("Age must be a positive integer")
-
 
     @classmethod
     def create_table(cls):

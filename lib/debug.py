@@ -12,14 +12,14 @@ def reset_database():
     Toy.drop_table()
     Toy.create_table()
 
-    Kid.create("Sam", "3")
-    Kid.create("Ceci", "4")
-    Kid.create("Justin", "4")
-    Kid.create("Alyssa", "2")
+    Kid.create("Sam", 3)
+    Kid.create("Ceci", 4)
+    Kid.create("Justin", 4)
+    Kid.create("Alyssa", 2)
 
-    Toy.create("Buzz", "Action figure", "New", "3")
-    Toy.create("Bear", "Stuffed Animal", "New", "1")
-    Toy.create("Barbie", "Doll", "New", "1")
+    Toy.create("Buzz", "Action figure", "New", 3)
+    Toy.create("Bear", "Stuffed Animal", "New", 1)
+    Toy.create("Barbie", "Doll", "New", 1)
 
 
 
