@@ -15,6 +15,11 @@ class Toy:
 
     def __repr__(self):
         return f"<Toy {self.id}: {self.name}, {self.type}, {self.condition}, {self.kid_id}>"
+    def __repr__(self):
+        return (
+            f"<Toy {self.id}: {self.name}, {self.type}, {self.condition}, " +
+            f"Kid ID: , {self.kid_id}>"
+        )
 
     @classmethod
     def create_table(cls):
@@ -25,10 +30,12 @@ class Toy:
             name TEXT,
             type TEXT,
             condition TEXT,
-            kid_id INTEGER)
+            kid_id INTEGER,
+            FOREIGN KEY (kid_id) REFERENCES kids(id))
         """
         CURSOR.execute(sql)
         CONN.commit()
+
 
     @classmethod
     def drop_table(cls):
@@ -40,8 +47,9 @@ class Toy:
         CONN.commit()
 
     def save(self):
-        """ Insert a new row with the name and age values of the current Toy instance.
+        """ Insert a new row with the name,type, condition, and kid values of the current Toy instance.
         Update object id attribute using the primary key value of new row.
+        Save the object in local dictionary using table row's PK as dictionary key
         """
         sql = """
             INSERT INTO toys (name, type, condition, kid_id)
@@ -101,10 +109,11 @@ class Toy:
             toy.kid_id = row[4]
         else:
             # not in dictionary, create new instance and add to dictionary
-            toy = cls(row[1], row[2])
+            toy = cls(row[1], row[2], row[3], row[4])
             toy.id = row[0]
             cls.all[toy.id] = toy
         return toy
+    
     @classmethod
     def get_all(cls):
         """Return a list containing a Toy object per row in the table"""

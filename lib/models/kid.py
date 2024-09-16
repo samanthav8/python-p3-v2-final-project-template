@@ -139,4 +139,17 @@ class Kid:
 
         row = CURSOR.execute(sql, (name,)).fetchone()
         return cls.instance_from_db(row) if row else None
-    
+
+    def toys(self):
+        """Return list of toys associated with current department"""
+        from models.toy import Toy
+        sql = """
+            SELECT * FROM toys
+            WHERE kid_id = ?
+        """
+        CURSOR.execute(sql, (self.id,),)
+
+        rows = CURSOR.fetchall()
+        return [
+            Toy.instance_from_db(row) for row in rows
+        ]
