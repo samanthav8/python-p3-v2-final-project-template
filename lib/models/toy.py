@@ -19,7 +19,58 @@ class Toy:
             f"Kid ID: , {self.kid_id}>"
         )
     
+    @property
+    def name(self):
+        return self._name
 
+    @name.setter
+    def name(self, name):
+        if isinstance(name, str) and len(name):
+            self._name = name
+        else:
+            raise ValueError(
+                "Name must be a non-empty string"
+            )
+        
+    @property
+    def type(self):
+        return self._type
+
+    @type.setter
+    def type(self, type):
+        if isinstance(type, str) and len(type):
+            self._type = type
+        else:
+            raise ValueError(
+                "Type must be a non-empty string"
+            )
+        
+    @property
+    def condition(self):
+        return self._condition
+
+    @condition.setter
+    def condition(self, condition):
+        if isinstance(condition, str) and len(condition):
+            self._condition = condition
+        else:
+            raise ValueError(
+                "Condition must be a non-empty string"
+            )
+
+    @property
+    def kid_id(self):
+        return self._kid_id
+
+    @kid_id.setter
+    def kid_id(self, kid_id):
+        if type(kid_id) is int and Kid.find_by_id(kid_id):
+            self._kid_id = kid_id
+        else:
+            raise ValueError(
+                "Kid_id must reference a kid in the database")
+        
+        
     @classmethod
     def create_table(cls):
         """ Create the toy table to store the attributes of the Toy instances"""
