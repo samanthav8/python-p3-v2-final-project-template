@@ -12,3 +12,10 @@ def list_kids():
     for kid in kids:
         print(kid)
 
+def find_kid_by_name():
+    name = input("Enter the kid's name: ")
+    kid = Kid.find_by_name(name)
+    print(kid) if kid else print(
+        f'There is no {name} in this daycare'
+    )
+
