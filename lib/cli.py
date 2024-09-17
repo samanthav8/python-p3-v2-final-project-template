@@ -5,7 +5,8 @@ from helpers import (
     list_kids,
     find_kid_by_name,
     find_kid_by_id,
-    create_kid
+    create_kid,
+    update_kid
 )
 
 
@@ -23,6 +24,8 @@ def main():
             find_kid_by_id()
         elif choice == "4":
             create_kid()
+        elif choice == "5":
+            update_kid()
         else:
             print("Invalid choice")
 
@@ -34,6 +37,7 @@ def menu():
     print("2. Find kid by name")
     print("3. Find kid by id")
     print("4. Enroll kid in daycare")
+    print("5. Update your kid's information")
 
 
 if __name__ == "__main__":

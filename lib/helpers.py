@@ -34,3 +34,19 @@ def create_kid():
         print("Error in enrolling your kid: ", exc)
 
 
+def update_kid():
+    id_ = input("Enter the kid's id: ")
+    if kid := Kid.find_by_id(id_):
+        try:
+            name = input("Enter the kid's new name: ")
+            kid.name = name
+            age = input("Enter the kid's new age: ")
+            kid.age = int(age)  # Convert age to an integer
+
+            kid.update()
+            print(f'Success: {kid}')
+        except Exception as exc:
+            print("Error updating kids information: ", exc)
+    else:
+        print(f'Kid with the id of {id_} not found')
+
