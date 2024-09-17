@@ -4,19 +4,23 @@ from models.toy import Toy
 
 
 def exit_program():
-    print("Goodbye!")
+    print("Have a nice day!")
     exit()
 
 def list_children():
     children = Child.get_all()
-    for child in children:
-        print(child)
+    if children:
+        print("Here are all children currently enrolled in the daycare:")
+        for child in children:
+            print(child)
+    else:
+        print("There are no children in the daycare at the moment.")
 
 def find_child_by_name():
-    name = input("Enter the child's name: ")
+    name = input("Please eneter the child's name: ")
     child = Child.find_by_name(name)
     print(child) if child else print(
-        f'There is no {name} in this daycare'
+        f'Sorry, there is no child named {name} in our daycare.'
     )
 
 def find_child_by_id():
