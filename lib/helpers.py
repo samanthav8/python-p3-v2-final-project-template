@@ -106,3 +106,27 @@ def update_toy():
             print("Error updating toy's information: ", exc)
     else:
         print(f'Toy with the id of {id_} not found')
+
+def delete_toy():
+    id_ = input("Enter the toy's id: ")
+    if toy := Toy.find_by_id(id_):
+        toy.delete()
+        print(f'{toy.name} has been removed from the toy box')
+    else:
+        print(f'Toy with the id of {id_} not found')
+
+
+def list_kid_toys():
+    kid_id = input("Enter the kid's id: ")
+    kid = Kid.find_by_id(kid_id)
+    
+    if kid:
+        toys = kid.toys()
+        if toys:
+            print(f"Toys belonging to {kid.name}:")
+            for toy in toys:
+                print(toy)
+        else:
+            print(f"{kid.name} doesn't have any toys.")
+    else:
+        print(f"No kid found with id {kid_id}")
