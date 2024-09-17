@@ -14,32 +14,32 @@ def list_children():
         for child in children:
             print(child)
     else:
-        print("There are no children in the daycare at the moment.")
+        print("There are no children enrolled in the daycare at this moment.")
 
 def find_child_by_name():
-    name = input("Please eneter the child's name: ")
+    name = input("Please enter the child's name: ")
     child = Child.find_by_name(name)
     print(child) if child else print(
         f'Sorry, there is no child named {name} in our daycare.'
     )
 
 def find_child_by_id():
-    id_ = input("Enter the child's id: ")
+    id_ = input("Please enter the child's id: ")
     child = Child.find_by_id(id_)
-    print(child) if child else print(f'There is no child with the id of {id_}')
+    print(child) if child else print(f'Sorry, there is no child with the id of {id_}')
 
 def create_child():
     name = input("What is the child's name?")
-    age = input("How old is your child?")
+    age = input("How old is the child?")
     try:
         child = Child.create(name, int(age))
-        print(f'{child} has been successfully added to the daycare')
+        print(f'{child} has been successfully enrolled to the daycare')
     except Exception as exc:
-        print("Error in enrolling your child: ", exc)
+        print("There was an error enrolling the child: ", exc)
 
 
 def update_child():
-    id_ = input("Enter the child's id: ")
+    id_ = input("Please enter the child's id: ")
     if child := Child.find_by_id(id_):
         try:
             name = input("Enter the child's new name: ")
@@ -48,20 +48,20 @@ def update_child():
             child.age = int(age)  # Convert age to an integer
 
             child.update()
-            print(f'Success: {child}')
+            print(f'{child.name} has been successfully updated!')
         except Exception as exc:
-            print("Error updating child's information: ", exc)
+            print("Sorry, there was an error updating {child.name}'s information. Please try again: ", exc)
     else:
-        print(f'Child with the id of {id_} not found')
+        print(f'Sorry, no child found with the id of {id_}.')
 
 
 def delete_child():
-    id_ = input("Enter the child's id: ")
+    id_ = input("Please enter the child's id: ")
     if child := Child.find_by_id(id_):
         child.delete()
-        print(f'Child with the id of {id_} has been deleted')
+        print(f'{child.name} has been unenrolled from the daycare.')
     else:
-        print(f'Child with the id of {id_} not found')
+        print(f'Sorry, no child found with the id of {id_}.')
 
 def list_toys():
     toys = Toy.get_all()

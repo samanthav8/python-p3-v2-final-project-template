@@ -51,7 +51,7 @@ def main():
         elif choice == "13":
             list_child_toys()
         else:
-            print("Invalid choice")
+            print("Invalid choice. Please try again!")
 
 
 def menu():
@@ -61,8 +61,8 @@ def menu():
     print("2. Find child by name")
     print("3. Find child by id")
     print("4. Enroll child in daycare")
-    print("5. Update your child's information")
-    print("6. Unenroll your child from daycare")
+    print("5. Update a child's information")
+    print("6. Unenroll a child from daycare")
     print("7. List all toys")
     print("8. Find toy by name")
     print("9. Find toy by id")
