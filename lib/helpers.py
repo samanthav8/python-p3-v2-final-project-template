@@ -50,3 +50,11 @@ def update_kid():
     else:
         print(f'Kid with the id of {id_} not found')
 
+
+def delete_kid():
+    id_ = input("Enter the kid's id: ")
+    if kid := Kid.find_by_id(id_):
+        kid.delete()
+        print(f'Kid with the of {id_} has been deleted')
+    else:
+        print(f'Kid with the id of {id_} not found')
