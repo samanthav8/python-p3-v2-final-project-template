@@ -24,3 +24,13 @@ def find_kid_by_id():
     kid = Kid.find_by_id(id_)
     print(kid) if kid else print(f'There is no kid with the id of {id_}')
 
+def create_kid():
+    name = input("What is the kids name?")
+    age = input("How old is your kid?")
+    try:
+        kid = Kid.create(name, int(age))
+        print(f'{kid} has been successfully added to the daycare')
+    except Exception as exc:
+        print("Error in enrolling your kid: ", exc)
+
+
