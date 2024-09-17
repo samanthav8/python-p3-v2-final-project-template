@@ -86,3 +86,23 @@ def create_toy():
         print(f'{toy} has been successfully added to the toy box')
     except Exception as exc:
         print("Could not add the toy into the toy box ", exc)
+
+def update_toy():
+    id_ = input("Enter the toy's id: ")
+    if toy := Toy.find_by_id(id_):
+        try:
+            name = input("Enter the toy's new name: ")
+            toy.name = name
+            type = input("Enter the toy's new type: ")
+            toy.type = type
+            condition = input("Enter the toy's new condition:")
+            toy.condition = condition
+            kid_id = input("Enter the kid's id in which the toy now belongs to:")
+            toy.kid_id = int(kid_id)
+
+            toy.update()
+            print(f'{toy.name} has been updated!')
+        except Exception as exc:
+            print("Error updating toy's information: ", exc)
+    else:
+        print(f'Toy with the id of {id_} not found')
