@@ -65,34 +65,38 @@ def delete_child():
 
 def list_toys():
     toys = Toy.get_all()
-    for toy in toys:
-        print(toy)
+    if toys:
+        print("Here are all the toys in the toy box:")
+        for toy in toys:
+            print(toy)
+    else:
+        print("The toy box is empty.")
 
 def find_toy_by_name():
-    name = input("Enter the toy's name: ")
+    name = input("Please enter the toy's name: ")
     toy = Toy.find_by_name(name)
     print(toy) if toy else print(
-        f'There is no toy named {name} in the toy box'
+        f'Sorry, there is no toy named {name} in the toy box.'
     )
 
 def find_toy_by_id():
-    id_ = input("Enter the Toy's id: ")
+    id_ = input("Please enter the toy's id: ")
     toy = Toy.find_by_id(id_)
-    print(toy) if toy else print(f'There is no toy with the id of {id_}')
+    print(toy) if toy else print(f'Sorry, there is no toy with the id of {id_}.')
 
 def create_toy():
     name = input("What is the toy's name?")
     type = input("What type of toy is it?")
     condition = input("What condition is the toy in?")
-    child_id = input("Who's toy is it? Please enter the child's id: ")
+    child_id = input("Which child does this toy belong to? Please enter the child's id: ")
     try:
         toy = Toy.create(name, type, condition, int(child_id))
-        print(f'{toy} has been successfully added to the toy box')
+        print(f'{toy.name} has been successfully added to the toy box')
     except Exception as exc:
-        print("Could not add the toy into the toy box ", exc)
+        print("There was an error adding {toy.name} to the toy box:  ", exc)
 
 def update_toy():
-    id_ = input("Enter the toy's id: ")
+    id_ = input("Please enter the toy's id: ")
     if toy := Toy.find_by_id(id_):
         try:
             name = input("Enter the toy's new name: ")
@@ -101,27 +105,27 @@ def update_toy():
             toy.type = type
             condition = input("Enter the toy's new condition:")
             toy.condition = condition
-            child_id = input("Enter the child's id in which the toy now belongs to:")
+            child_id = input("Enter the child's id who now owns the toy:")
             toy.child_id = int(child_id)
 
             toy.update()
-            print(f'{toy.name} has been updated!')
+            print(f'{toy.name} has been updated in the toy box!')
         except Exception as exc:
-            print("Error updating toy's information: ", exc)
+            print("There was an error updating the toy's information: ", exc)
     else:
-        print(f'Toy with the id of {id_} not found')
+        print(f'Sorry, no toy found with the id of {id_}.')
 
 def delete_toy():
-    id_ = input("Enter the toy's id: ")
+    id_ = input("Please enter the toy's id: ")
     if toy := Toy.find_by_id(id_):
         toy.delete()
         print(f'{toy.name} has been removed from the toy box')
     else:
-        print(f'Toy with the id of {id_} not found')
+        print(f'Sorry, no toy found with the id of {id_}.')
 
 
 def list_child_toys():
-    child_id = input("Enter the child's id: ")
+    child_id = input("Please enter the child's id: ")
     child = Child.find_by_id(child_id)
     
     if child:
@@ -133,4 +137,4 @@ def list_child_toys():
         else:
             print(f"{child.name} doesn't have any toys.")
     else:
-        print(f"No child found with id {child_id}")
+        print(f"Sorry, no child found with the id of {child_id}.")
