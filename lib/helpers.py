@@ -75,3 +75,14 @@ def find_toy_by_id():
     id_ = input("Enter the Toy's id: ")
     toy = Toy.find_by_id(id_)
     print(toy) if toy else print(f'There is no toy with the id of {id_}')
+
+def create_toy():
+    name = input("What is the toys name?")
+    type = input("What type of toy is it?")
+    condition = input("What condition is the toy in?")
+    kid_id = input("Who's toy is it? Please enter the kids id: ")
+    try:
+        toy = Toy.create(name, type, condition, int(kid_id))
+        print(f'{toy} has been successfully added to the toy box')
+    except Exception as exc:
+        print("Could not add the toy into the toy box ", exc)
