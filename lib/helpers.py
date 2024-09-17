@@ -58,3 +58,8 @@ def delete_kid():
         print(f'Kid with the of {id_} has been deleted')
     else:
         print(f'Kid with the id of {id_} not found')
+
+def list_toys():
+    toys = Toy.get_all()
+    for toy in toys:
+        print(toy)
