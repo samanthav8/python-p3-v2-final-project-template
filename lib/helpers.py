@@ -63,3 +63,15 @@ def list_toys():
     toys = Toy.get_all()
     for toy in toys:
         print(toy)
+
+def find_toy_by_name():
+    name = input("Enter the toy's name: ")
+    toy = Toy.find_by_name(name)
+    print(toy) if toy else print(
+        f'There is no toy named {name} in the toy box'
+    )
+
+def find_toy_by_id():
+    id_ = input("Enter the Toy's id: ")
+    toy = Toy.find_by_id(id_)
+    print(toy) if toy else print(f'There is no toy with the id of {id_}')

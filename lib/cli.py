@@ -8,7 +8,9 @@ from helpers import (
     create_kid,
     update_kid,
     delete_kid,
-    list_toys
+    list_toys,
+    find_toy_by_name,
+    find_toy_by_id
 )
 
 
@@ -32,6 +34,10 @@ def main():
             delete_kid()
         elif choice == "7":
             list_toys()
+        elif choice == "8":
+            find_toy_by_name()
+        elif choice == "9":
+            find_toy_by_id()
         else:
             print("Invalid choice")
 
@@ -46,6 +52,8 @@ def menu():
     print("5. Update your kid's information")
     print("6. Unenroll your kid's from daycare")
     print("7. List all toys")
+    print("8. Find toy by name")
+    print("9. Find toy by id")
 
 
 if __name__ == "__main__":
