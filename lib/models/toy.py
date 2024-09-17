@@ -1,22 +1,21 @@
-# lib/models/toy.py
 from models.__init__ import CURSOR, CONN
-from models.kid import Kid
+from models.child import Child
 
 class Toy:
 
     all = {}
 
-    def __init__(self, name, type, condition, kid_id, id=None):
+    def __init__(self, name, type, condition, child_id, id=None):
         self.id = id
         self.name = name
         self.type = type
         self.condition = condition
-        self.kid_id = kid_id
+        self.child_id = child_id
 
     def __repr__(self):
         return (
             f"<Toy {self.id}: {self.name}, {self.type}, {self.condition}, " +
-            f"Kid ID: , {self.kid_id}>"
+            f"Child ID: , {self.child_id}>"
         )
     
     @property
@@ -59,16 +58,16 @@ class Toy:
             )
 
     @property
-    def kid_id(self):
-        return self._kid_id
+    def child_id(self):
+        return self._child_id
 
-    @kid_id.setter
-    def kid_id(self, kid_id):
-        if type(kid_id) is int and Kid.find_by_id(kid_id):
-            self._kid_id = kid_id
+    @child_id.setter
+    def child_id(self, child_id):
+        if type(child_id) is int and Child.find_by_id(child_id):
+            self._child_id = child_id
         else:
             raise ValueError(
-                "Kid_id must reference a kid in the database")
+                "Child_id must reference a child in the database")
         
         
     @classmethod
@@ -80,16 +79,15 @@ class Toy:
             name TEXT,
             type TEXT,
             condition TEXT,
-            kid_id INTEGER,
-            FOREIGN KEY (kid_id) REFERENCES kids(id))
+            child_id INTEGER,
+            FOREIGN KEY (child_id) REFERENCES children(id))
         """
         CURSOR.execute(sql)
         CONN.commit()
 
-
     @classmethod
     def drop_table(cls):
-        """ Drop the table that stores Kid instances """
+        """ Drop the table that stores Toy instances """
         sql = """
             DROP TABLE IF EXISTS toys;
         """
@@ -97,25 +95,25 @@ class Toy:
         CONN.commit()
 
     def save(self):
-        """ Insert a new row with the name,type, condition, and kid values of the current Toy instance.
+        """ Insert a new row with the name, type, condition, and child values of the current Toy instance.
         Update object id attribute using the primary key value of new row.
         Save the object in local dictionary using table row's PK as dictionary key
         """
         sql = """
-            INSERT INTO toys (name, type, condition, kid_id)
+            INSERT INTO toys (name, type, condition, child_id)
             VALUES (?, ?, ?, ?)
         """
 
-        CURSOR.execute(sql, (self.name, self.type, self.condition, self.kid_id))
+        CURSOR.execute(sql, (self.name, self.type, self.condition, self.child_id))
         CONN.commit()
 
         self.id = CURSOR.lastrowid
         type(self).all[self.id] = self
 
     @classmethod
-    def create(cls, name, type, condition, kid_id):
+    def create(cls, name, type, condition, child_id):
         """ Initialize a new Toy instance and save the object to the database """
-        toy = cls(name, type, condition, kid_id)
+        toy = cls(name, type, condition, child_id)
         toy.save()
         return toy
     
@@ -123,10 +121,10 @@ class Toy:
         """Update the table row corresponding to the current Toy instance."""
         sql = """
             UPDATE toys
-            SET name = ?, type = ?, condition = ?, kid_id = ?
+            SET name = ?, type = ?, condition = ?, child_id = ?
             WHERE id = ?
         """
-        CURSOR.execute(sql, (self.name, self.type, self.condition, self.kid_id, self.id))
+        CURSOR.execute(sql, (self.name, self.type, self.condition, self.child_id, self.id))
         CONN.commit()
 
     def delete(self):
@@ -156,7 +154,7 @@ class Toy:
             toy.name = row[1]
             toy.type = row[2]
             toy.condition = row[3]
-            toy.kid_id = row[4]
+            toy.child_id = row[4]
         else:
             # not in dictionary, create new instance and add to dictionary
             toy = cls(row[1], row[2], row[3], row[4])
@@ -175,7 +173,7 @@ class Toy:
         rows = CURSOR.execute(sql).fetchall()
 
         return [cls.instance_from_db(row) for row in rows]
-
+    
     @classmethod
     def find_by_id(cls, id):
         """Return a Toy object corresponding to the table row matching the specified primary key"""
@@ -187,8 +185,7 @@ class Toy:
 
         row = CURSOR.execute(sql, (id,)).fetchone()
         return cls.instance_from_db(row) if row else None
-
-
+    
     @classmethod
     def find_by_name(cls, name):
         """Return a Toy object corresponding to first table row matching specified name"""
