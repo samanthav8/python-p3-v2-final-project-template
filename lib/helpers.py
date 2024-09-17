@@ -19,3 +19,8 @@ def find_kid_by_name():
         f'There is no {name} in this daycare'
     )
 
+def find_kid_by_id():
+    id_ = input("Enter the Kid's id: ")
+    kid = Kid.find_by_id(id_)
+    print(kid) if kid else print(f'There is no kid with the id of {id_}')
+
