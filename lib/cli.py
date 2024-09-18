@@ -17,41 +17,55 @@ from helpers import (
     list_child_toys
 )
 
-
-def main():
+def main_menu():
     while True:
-        menu()
-        choice = input("> ")
-        if choice == "0":
-            exit_program()
-        elif choice == "1":
+        print("Welcome to the Daycare!")
+        print("Please choose from the following options")
+        print("Type C or c to see the list of children")
+        print("Type E or e to exit")
+
+        choice = input("> ").lower()
+
+        if choice == 'c':
             list_children()
-        elif choice == "2":
-            find_child_by_name()
-        elif choice == "3":
-            find_child_by_id()
-        elif choice == "4":
-            create_child()
-        elif choice == "5":
-            update_child()
-        elif choice == "6":
-            delete_child()
-        elif choice == "7":
-            list_toys()
-        elif choice == "8":
-            find_toy_by_name()
-        elif choice == "9":
-            find_toy_by_id()
-        elif choice == "10":
-            create_toy()
-        elif choice == "11":
-            update_toy()
-        elif choice == "12":
-            delete_toy()
-        elif choice == "13":
-            list_child_toys()
+        elif choice == 'e':
+            exit_program()
         else:
-            print("Invalid choice. Please try again!")
+            print("Invalid choice. Please try again.")
+# def main():
+#    while True:
+#        menu()
+#        choice = input("> ")
+#        if choice == "0":
+#            exit_program()
+#        elif choice == "1":
+#            list_children()
+#        elif choice == "2":
+#            find_child_by_name()
+#        elif choice == "3":
+#            find_child_by_id()
+#        elif choice == "4":
+#            create_child()
+#        elif choice == "5":
+#            update_child()
+#        elif choice == "6":
+#            delete_child()
+#        elif choice == "7":
+#            list_toys()
+#        elif choice == "8":
+#            find_toy_by_name()
+#        elif choice == "9":
+#            find_toy_by_id()
+#        elif choice == "10":
+#            create_toy()
+#        elif choice == "11":
+#            update_toy()
+#        elif choice == "12":
+#            delete_toy()
+#        elif choice == "13":
+#            list_child_toys()
+#        else:
+#            print("Invalid choice. Please try again!")
 
 
 def menu():
@@ -73,4 +87,4 @@ def menu():
 
 
 if __name__ == "__main__":
-    main()
+    main_menu()

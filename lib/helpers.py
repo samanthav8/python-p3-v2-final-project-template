@@ -11,8 +11,9 @@ def list_children():
     children = Child.get_all()
     if children:
         print("Here are all children currently enrolled in the daycare:")
-        for child in children:
-            print(child)
+        for i,child in enumerate(children, start=1):
+            print(f"{i}. {child.name}")
+        return children
     else:
         print("There are no children enrolled in the daycare at this moment.")
 
