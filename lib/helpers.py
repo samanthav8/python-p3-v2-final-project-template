@@ -39,21 +39,19 @@ def create_child():
         print("There was an error enrolling the child: ", exc)
 
 
-def update_child():
-    id_ = input("Please enter the child's id: ")
-    if child := Child.find_by_id(id_):
+def update_child(child_id):
+    if child := Child.find_by_id(child_id):
         try:
-            name = input("Enter the child's new name: ")
+            name = input(f"Enter {child.name}'s new name: ")
             child.name = name
-            age = input("Enter the child's new age: ")
-            child.age = int(age)  # Convert age to an integer
-
+            age = input(f"Enter {child.name}'s new age: ")
+            child.age = int(age) 
             child.update()
             print(f'{child.name} has been successfully updated!')
         except Exception as exc:
             print("Sorry, there was an error updating {child.name}'s information. Please try again: ", exc)
     else:
-        print(f'Sorry, no child found with the id of {id_}.')
+        print(f'Sorry, no child found.')
 
 
 def delete_child():
@@ -85,16 +83,18 @@ def find_toy_by_id():
     toy = Toy.find_by_id(id_)
     print(toy) if toy else print(f'Sorry, there is no toy with the id of {id_}.')
 
-def create_toy():
-    name = input("What is the toy's name?")
-    type = input("What type of toy is it?")
-    condition = input("What condition is the toy in?")
-    child_id = input("Which child does this toy belong to? Please enter the child's id: ")
+def create_toy(child):
+    name = input("What is the toy's name? ")
+    toy_type = input("What type of toy is it? ")
+    condition = input("What condition is the toy in? ")
+    
     try:
-        toy = Toy.create(name, type, condition, int(child_id))
-        print(f'{toy.name} has been successfully added to the toy box')
+        toy = Toy.create(name, toy_type, condition, child.id)
+        print(f'{toy.name} has been successfully added to {child.name}\'s toy box.')
     except Exception as exc:
-        print("There was an error adding {toy.name} to the toy box:  ", exc)
+        print(f"There was an error adding the toy to the toy box: {exc}")
+
+
 
 def update_toy():
     id_ = input("Please enter the toy's id: ")
@@ -102,8 +102,8 @@ def update_toy():
         try:
             name = input("Enter the toy's new name: ")
             toy.name = name
-            type = input("Enter the toy's new type: ")
-            toy.type = type
+            toy_type = input("Enter the toy's new type: ")
+            toy.toy_type = toy_type
             condition = input("Enter the toy's new condition:")
             toy.condition = condition
             child_id = input("Enter the child's id who now owns the toy:")

@@ -5,16 +5,16 @@ class Toy:
 
     all = {}
 
-    def __init__(self, name, type, condition, child_id, id=None):
+    def __init__(self, name, toy_type, condition, child_id, id=None):
         self.id = id
         self.name = name
-        self.type = type
+        self.toy_type = toy_type
         self.condition = condition
         self.child_id = child_id
 
     def __repr__(self):
         return (
-            f"<Toy {self.id}: {self.name}, {self.type}, {self.condition}, " +
+            f"<Toy {self.id}: {self.name}, {self.toy_type}, {self.condition}, " +
             f"Child ID: , {self.child_id}>"
         )
     
@@ -32,16 +32,16 @@ class Toy:
             )
         
     @property
-    def type(self):
-        return self._type
+    def toy_type(self):
+        return self._toy_type
 
-    @type.setter
-    def type(self, type):
-        if isinstance(type, str) and len(type):
-            self._type = type
+    @toy_type.setter
+    def toy_type(self, toy_type):
+        if isinstance(toy_type, str) and len(toy_type):
+            self._toy_type = toy_type
         else:
             raise ValueError(
-                "Type must be a non-empty string"
+                "Toy Type must be a non-empty string"
             )
         
     @property
@@ -77,7 +77,7 @@ class Toy:
             CREATE TABLE IF NOT EXISTS toys(
             id INTEGER PRIMARY KEY,
             name TEXT,
-            type TEXT,
+            toy_type TEXT,
             condition TEXT,
             child_id INTEGER,
             FOREIGN KEY (child_id) REFERENCES children(id))
@@ -95,25 +95,25 @@ class Toy:
         CONN.commit()
 
     def save(self):
-        """ Insert a new row with the name, type, condition, and child values of the current Toy instance.
+        """ Insert a new row with the name, toy_type, condition, and child values of the current Toy instance.
         Update object id attribute using the primary key value of new row.
         Save the object in local dictionary using table row's PK as dictionary key
         """
         sql = """
-            INSERT INTO toys (name, type, condition, child_id)
+            INSERT INTO toys (name, toy_type, condition, child_id)
             VALUES (?, ?, ?, ?)
         """
 
-        CURSOR.execute(sql, (self.name, self.type, self.condition, self.child_id))
+        CURSOR.execute(sql, (self.name, self.toy_type, self.condition, self.child_id))
         CONN.commit()
 
         self.id = CURSOR.lastrowid
         type(self).all[self.id] = self
 
     @classmethod
-    def create(cls, name, type, condition, child_id):
+    def create(cls, name, toy_type, condition, child_id):
         """ Initialize a new Toy instance and save the object to the database """
-        toy = cls(name, type, condition, child_id)
+        toy = cls(name, toy_type, condition, child_id)
         toy.save()
         return toy
     
@@ -121,10 +121,10 @@ class Toy:
         """Update the table row corresponding to the current Toy instance."""
         sql = """
             UPDATE toys
-            SET name = ?, type = ?, condition = ?, child_id = ?
+            SET name = ?, toy_type = ?, condition = ?, child_id = ?
             WHERE id = ?
         """
-        CURSOR.execute(sql, (self.name, self.type, self.condition, self.child_id, self.id))
+        CURSOR.execute(sql, (self.name, self.toy_type, self.condition, self.child_id, self.id))
         CONN.commit()
 
     def delete(self):
@@ -152,7 +152,7 @@ class Toy:
         if toy:
             # ensure attributes match row values in case local object was modified
             toy.name = row[1]
-            toy.type = row[2]
+            toy.toy_type = row[2]
             toy.condition = row[3]
             toy.child_id = row[4]
         else:
