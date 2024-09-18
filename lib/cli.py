@@ -31,7 +31,7 @@ def main_menu():
         elif choice == 'e':
             exit_program()
         else:
-            print("Invalid choice. Please try again.")
+            print("Not a valid selection. Please try again")
 
 def child_menu():
     while True:
@@ -54,7 +54,7 @@ def child_menu():
                 child = children[int(choice) - 1] 
                 child_details_menu(child)
             else:
-                print("Invalid choice. Please try again.")
+                print("Not a valid selection. Please try again")
         else:
             return  
 
@@ -94,7 +94,7 @@ def child_details_menu(child):
             delete_child(child.id)
             return
         else:
-            print("Invalid choice. Please try again.")
+            print("Not a valid selection. Please try again")
 
 def toy_details_menu(toy):
     while True:
@@ -118,7 +118,7 @@ def toy_details_menu(toy):
         elif choice == 'e':
             exit_program()
         else:
-            print("Invalid choice. Please try again.")
+            print("Not a valid selection. Please try again")
 
 
     
