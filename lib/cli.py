@@ -72,7 +72,7 @@ def child_details_menu(child):
 
         print("Type the number of a toy to view information about that toy")
         print("Type A or a to add a new toy")
-        print("Type D or d to delete a toy")
+        print("Type D or d to delete this child")
         print("Type U or u to update the child")
         print("Type B or b to go back to the children list")
         print("Type E or e to exit")
@@ -89,17 +89,39 @@ def child_details_menu(child):
             exit_program()
         elif choice.isdigit() and 1 <= int(choice) <= len(toys):
             toy = toys[int(choice) - 1]
-            pass
+            toy_details_menu(toy)
         elif choice == 'd':
-            toy_index = input("Enter the number of the toy to remove from the toy box: ")
-            if toy_index.isdigit() and 1 <= int(toy_index) <= len(toys):
-                toy_to_delete = toys[int(toy_index) - 1]
-                toy_to_delete.delete()
-                print(f"{toy_to_delete.name} has been removed from the toy box.")
-            else:
-                print("No toy exists with that number. Please try again")
+            delete_child(child.id)
+            return
         else:
             print("Invalid choice. Please try again.")
+
+def toy_details_menu(toy):
+    while True:
+        print(f"Name: {toy.name}")
+        print(f"Type of toy: {toy.toy_type}")
+        print(f"Condition: {toy.condition}")
+        print("Type D or d to delete this toy")
+        print("Type U or u to update this toy")
+        print("Type B or b to go back")
+        print("Type E or e to exit")
+
+        choice = input("> ").lower()
+
+        if choice == 'd':
+            delete_toy(toy.id)
+            return
+        elif choice == 'u':
+            update_toy(toy.id)
+        elif choice == 'b':
+            return
+        elif choice == 'e':
+            exit_program()
+        else:
+            print("Invalid choice. Please try again.")
+
+
+    
 
 # def main():
 #    while True:
