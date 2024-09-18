@@ -12,11 +12,6 @@ class Toy:
         self.condition = condition
         self.child_id = child_id
 
-    def __repr__(self):
-        return (
-            f"<Toy {self.id}: {self.name}, {self.toy_type}, {self.condition}, " +
-            f"Child ID: , {self.child_id}>"
-        )
     
     @property
     def name(self):

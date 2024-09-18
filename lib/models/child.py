@@ -10,9 +10,6 @@ class Child:
         self.name = name
         self.age = age
 
-    def __repr__(self):
-        return f"<Child {self.id}: {self.name}, {self.age}>"
-    
     @property
     def name(self):
         return self._name
