@@ -27,11 +27,37 @@ def main_menu():
         choice = input("> ").lower()
 
         if choice == 'c':
-            list_children()
+            child_menu()
         elif choice == 'e':
             exit_program()
         else:
             print("Invalid choice. Please try again.")
+
+def child_menu():
+    while True:
+        children = list_children()
+        if children:
+            print("Type the number to view details of a child")
+            print("Type A or a to add a new child")
+            print("Type B or b to go back to the previous menu")
+            print("Type E or e to exit")
+
+            choice = input("> ").lower()
+
+            if choice == 'a':
+                create_child()
+            elif choice == 'b':
+                return  
+            elif choice == 'e':
+                exit_program()
+            elif choice.isdigit() and 1 <= int(choice) <= len(children):
+                child = children[int(choice) - 1] 
+                pass
+            else:
+                print("Invalid choice. Please try again.")
+        else:
+            return  
+
 # def main():
 #    while True:
 #        menu()

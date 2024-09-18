@@ -30,11 +30,11 @@ def find_child_by_id():
     print(child) if child else print(f'Sorry, there is no child with the id of {id_}')
 
 def create_child():
-    name = input("What is the child's name?")
-    age = input("How old is the child?")
+    name = input("What is the child's name? ")
+    age = input("How old is the child? ")
     try:
         child = Child.create(name, int(age))
-        print(f'{child} has been successfully enrolled to the daycare')
+        print(f'{child.name} has been successfully enrolled to the daycare')
     except Exception as exc:
         print("There was an error enrolling the child: ", exc)
 
