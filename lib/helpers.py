@@ -17,17 +17,6 @@ def list_children():
     else:
         print("There are no children enrolled in the daycare at this moment.")
 
-def find_child_by_name():
-    name = input("Please enter the child's name: ")
-    child = Child.find_by_name(name)
-    print(child) if child else print(
-        f'Sorry, there is no child named {name} in our daycare.'
-    )
-
-def find_child_by_id():
-    id_ = input("Please enter the child's id: ")
-    child = Child.find_by_id(id_)
-    print(child) if child else print(f'Sorry, there is no child with the id of {id_}')
 
 def create_child():
     name = input("What is the child's name? ")
@@ -63,27 +52,6 @@ def delete_child(child_id):
         print(f'{child.name} has been unenrolled from the daycare.')
     else:
         print(f'Sorry, {child.name} could not be unenrolled.')
-
-def list_toys():
-    toys = Toy.get_all()
-    if toys:
-        print("Here are all the toys in the toy box:")
-        for toy in toys:
-            print(toy)
-    else:
-        print("The toy box is empty.")
-
-def find_toy_by_name():
-    name = input("Please enter the toy's name: ")
-    toy = Toy.find_by_name(name)
-    print(toy) if toy else print(
-        f'Sorry, there is no toy named {name} in the toy box.'
-    )
-
-def find_toy_by_id():
-    id_ = input("Please enter the toy's id: ")
-    toy = Toy.find_by_id(id_)
-    print(toy) if toy else print(f'Sorry, there is no toy with the id of {id_}.')
 
 def create_toy(child):
     name = input("What is the toy's name? ")
@@ -126,19 +94,3 @@ def delete_toy(toy_id):
         print(f'{toy.name} has been removed from the toy box')
     else:
         print(f'Sorry, {toy.name} could not be removed from the toy box.')
-
-
-def list_child_toys():
-    child_id = input("Please enter the child's id: ")
-    child = Child.find_by_id(child_id)
-    
-    if child:
-        toys = child.toys()
-        if toys:
-            print(f"Toys belonging to {child.name}:")
-            for toy in toys:
-                print(toy)
-        else:
-            print(f"{child.name} doesn't have any toys.")
-    else:
-        print(f"Sorry, no child found with the id of {child_id}.")

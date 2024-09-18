@@ -3,18 +3,12 @@
 from helpers import (
     exit_program,
     list_children,
-    find_child_by_name,
-    find_child_by_id,
     create_child,
     update_child,
     delete_child,
-    list_toys,
-    find_toy_by_name,
-    find_toy_by_id,
     create_toy,
     update_toy,
-    delete_toy,
-    list_child_toys
+    delete_toy
 )
 
 def border():
@@ -25,6 +19,7 @@ def line():
 
 def main_menu():
     while True:
+        line()
         print("Welcome to the Daycare!")
         border()
         print("Please choose from the following options:")
