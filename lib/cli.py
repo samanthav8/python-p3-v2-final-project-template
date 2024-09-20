@@ -101,7 +101,7 @@ def child_details_menu(child):
             return  
         elif choice == 'u':
             border()
-            update_child(child.id)
+            update_child(child)
             line()
         elif choice == 'e':
             line()
@@ -112,7 +112,7 @@ def child_details_menu(child):
             toy_details_menu(toy)
         elif choice == 'd':
             line()
-            delete_child(child.id)
+            delete_child(child)
             return
         else:
             print("Not a valid selection. Please try again")
@@ -132,11 +132,11 @@ def toy_details_menu(toy):
 
         if choice == 'd':
             line()
-            delete_toy(toy.id)
+            delete_toy(toy)
             return
         elif choice == 'u':
             border()
-            update_toy(toy.id)
+            update_toy(toy)
             line()
         elif choice == 'b':
             line()

@@ -28,30 +28,33 @@ def create_child():
         print("There was an error enrolling the child: ", exc)
 
 
-def update_child(child_id):
-    if child := Child.find_by_id(child_id):
-        try:
-            name = input(f"Enter {child.name}'s new name. Press <enter> to keep current name : ")
-            if name:
-                child.name = name
-            age = input(f"Enter {child.name}'s new age. Press <enter> to keep current age : ")
-            if age:
+def update_child(child):
+    try:
+        name = input(f"Enter {child.name}'s new name. Press <enter> to keep current name : ")
+        if name:
+            child.name = name
+        age = input(f"Enter {child.name}'s new age. Press <enter> to keep current age : ")
+        if age:
                 child.age = int(age)
-            child.update()
-            print(f'{child.name} has been successfully updated!')
-        except Exception as exc:
-            print(f"Sorry, there was an error updating {child.name}'s information. Please try again: ", exc)
-    else:
-        print(f'Sorry, no child found.')
+        child.update()
+        print(f'{child.name} has been successfully updated!')
+    except Exception as exc:
+        print(f"Sorry, there was an error updating {child.name}'s information. Please try again: ", exc)
 
 
 
-def delete_child(child_id):
-    if child := Child.find_by_id(child_id):
+def delete_child(child):
+    try:
+        toys = child.toys()
+        if toys:
+            for toy in toys:
+                toy.delete()
+                print(f"{toy.name} has been removed from the toy box")
         child.delete()
         print(f'{child.name} has been unenrolled from the daycare.')
-    else:
-        print(f'Sorry, {child.name} could not be unenrolled.')
+    except Exception as exc:
+            print(f"There was an error deleting the child: {exc}")
+
 
 def create_toy(child):
     name = input("What is the toy's name? ")
@@ -66,31 +69,27 @@ def create_toy(child):
 
 
 
-def update_toy(toy_id):
-    toy = Toy.find_by_id(toy_id)
-    if toy:
-        try:
-            name = input(f"Enter the new name for {toy.name}. Press <enter> to keep current name : ")
-            if name:
-                toy.name = name
-            toy_type = input(f"Enter the new type for {toy.name}. Press <enter> to keep current type : ")
-            if toy_type:
-                toy.toy_type = toy_type
-            condition = input(f"Enter the new condition for {toy.name}. Press <enter> to keep current condition : ")
-            if condition:
-                toy.condition = condition
-
-            toy.update()
-            print(f'{toy.name} has been successfully updated in the toy box!')
-        except Exception as exc:
-            print(f"There was an error updating the toy's information: {exc}")
-    else:
-        print(f'Sorry, no toy found.')
+def update_toy(toy):
+    try:
+        name = input(f"Enter the new name for {toy.name}. Press <enter> to keep current name : ")
+        if name:
+            toy.name = name
+        toy_type = input(f"Enter the new type for {toy.name}. Press <enter> to keep current type : ")
+        if toy_type:
+            toy.toy_type = toy_type
+        condition = input(f"Enter the new condition for {toy.name}. Press <enter> to keep current condition : ")
+        if condition:
+            toy.condition = condition
+        toy.update()
+        print(f'{toy.name} has been successfully updated in the toy box!')
+    except Exception as exc:
+        print(f"There was an error updating the toy's information: {exc}")
 
 
-def delete_toy(toy_id):
-    if toy := Toy.find_by_id(toy_id):
+
+def delete_toy(toy):
+    try:
         toy.delete()
         print(f'{toy.name} has been removed from the toy box')
-    else:
+    except Exception as exc:
         print(f'Sorry, {toy.name} could not be removed from the toy box.')

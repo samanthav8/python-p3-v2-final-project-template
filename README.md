@@ -24,12 +24,6 @@ Exits the program and prints a goodbye message.
 list_children()
 Lists all children currently enrolled in the daycare.
 
-find_child_by_name()
-Finds and displays a child by their name.
-
-find_child_by_id()
-Finds and displays a child by their ID.
-
 create_child()
 Adds a new child to the daycare.
 
@@ -38,15 +32,6 @@ Updates the information of a child.
 
 delete_child()
 Unenrolls a child from the daycare.
-
-list_toys()
-Lists all toys in the daycare.
-
-find_toy_by_name()
-Finds and displays a toy by its name.
-
-find_toy_by_id()
-Finds and displays a toy by its ID.
 
 create_toy()
 Adds a new toy to the toy box and is associated with a child.
@@ -57,16 +42,11 @@ Updates the information of a toy.
 delete_toy()
 Removes a toy from the toy box.
 
-list_child_toys()
-Lists all toys belonging to a specific child.
-
 ## Models
 -Child
 Attributes: name(string), age(integer)
 Methods
 create(name, age): Creates a new child.
-find_by_name(name): Finds a child by their name.
-find_by_id(id): Finds a child by their ID.
 update(): Updates the child’s information.
 delete(): Deletes the child.
 toys(): Lists all toys belonging to the child.
@@ -75,8 +55,6 @@ toys(): Lists all toys belonging to the child.
 Attributes: name(string), type(string), conditon(string), child_id(integer)
 Methods
 create(name, type, condition, child_id): Creates a new toy.
-find_by_name(name): Finds a toy by its name.
-find_by_id(id): Finds a toy by its ID.
 update(): Updates the toy’s information.
 delete(): Removes the toy.
 
