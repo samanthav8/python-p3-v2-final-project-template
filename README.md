@@ -11,6 +11,7 @@ The main features in the CLI app are:
 1. Clone the repository: git clone https://github.com/samanthav8/python-p3-v2-final-project-template
 2. Install dependencies: pipenv install
 3. Activate the virtual environment: pipenv shell
+4. Seed the database: python lib/seed.py
 
 ## Usage
 1. Run the CLI Application: python lib/cli.py
@@ -54,8 +55,9 @@ toys(): Lists all toys belonging to the child.
 -Toy
 Attributes: name(string), type(string), conditon(string), child_id(integer)
 Methods
-create(name, type, condition, child_id): Creates a new toy.
+create(name, toy_type, condition, child_id): Creates a new toy.
 update(): Updates the toy’s information.
 delete(): Removes the toy.
 
-## Credits
+##Credits
+The template for this project was forked and clone from https://github.com/learn-co-curriculum/python-p3-v2-final-project-template
